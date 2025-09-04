@@ -1,0 +1,35 @@
+services:
+  db:
+    image: mysql:8
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mysql_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build: ./server
+    container_name: backend
+    restart: always
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./server/.env
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./server:/app # mount hanya folder backend
+      - /app/node_modules # anonymous volume untuk node_modules di container
+
+volumes:
+  db_data:

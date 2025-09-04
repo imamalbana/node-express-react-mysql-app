@@ -1,0 +1,62 @@
+# Node.js dependencies
+node_modules/
+
+# Logs and debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Build outputs
+build/
+dist/
+out/
+
+# Test and coverage
+coverage/
+test/
+tests/
+
+# IDE/editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Version control
+.git/
+.gitignore
+.svn/
+.hg/
+
+# Environment and secrets
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.crt
+config.local.*
+*.local.yml
+
+# Documentation
+README*
+*.md
+docs/
+
+# Temporary and local files
+tmp/
+temp/
+*.tmp
+.local/
+local/
+
+# Docker files
+Dockerfile*
+docker-compose*
+
+# Miscellaneous
+.editorconfig
+
+# Exclude package-lock.json files from being ignored (explicitly allowed)
+!package-lock.json
