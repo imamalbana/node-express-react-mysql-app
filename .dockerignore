@@ -1,62 +1,31 @@
-# Node.js dependencies
-node_modules/
-
-# Logs and debug files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-*.log
-
-# Build outputs
-build/
-dist/
-out/
-
-# Test and coverage
-coverage/
-test/
-tests/
-
-# IDE/editor files
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Version control
-.git/
+# Git
+.git
 .gitignore
-.svn/
-.hg/
 
-# Environment and secrets
+# Docker config
+.dockerignore
+docker-compose.yml
+README.md
+
+# Node modules (biar install di container saja)
+**/node_modules
+
+# Logs
+*.log
+logs/
+
+# Environment files (jangan ikut ke image)
 .env
-.env.*
-*.env
-*.pem
-*.key
-*.crt
-config.local.*
-*.local.yml
+.env.local
+.env.*.local
+client/.env
+server/.env
 
-# Documentation
-README*
-*.md
-docs/
+# Build artifacts (biar container build sendiri)
+client/dist
+client/build
+server/dist
 
-# Temporary and local files
-tmp/
-temp/
-*.tmp
-.local/
-local/
-
-# Docker files
-Dockerfile*
-docker-compose*
-
-# Miscellaneous
-.editorconfig
-
-# Exclude package-lock.json files from being ignored (explicitly allowed)
-!package-lock.json
+# OS junk
+.DS_Store
+Thumbs.db

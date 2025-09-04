@@ -1,47 +1,34 @@
 # Node modules
-node_modules/
+client/node_modules/
+server/node_modules/
 **/node_modules/
 
+# Build outputs
+client/dist/
+client/build/
+server/dist/
+
 # Logs
-logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# Environment files
+# Environment
 .env
 .env.local
 .env.*.local
+client/.env
+server/.env
 
-# Build / Dist
-dist/
-build/
-**/dist/
-**/build/
+# Prisma SQLite (kalau ada file db lokal)
+server/prisma/dev.db
+server/prisma/dev.db-journal
 
-# Prisma
-prisma/migrations/
-prisma/dev.db
-
-# Vite / React
-.vite/
-.cache/
-*.cache
-
-# Mac / OS
+# OS junk
 .DS_Store
+Thumbs.db
 
-# IDE / Editor
-.vscode/
-.idea/
-*.sublime-workspace
-*.sublime-project
-
-# Docker
-docker-compose.override.yml
-**/Dockerfile*
-
-# Misc
-*.bak
-*.swp
+# Docker volumes/data
+db_data/
