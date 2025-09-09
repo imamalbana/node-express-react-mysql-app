@@ -30,6 +30,7 @@ services:
     volumes:
       - ./server:/app # mount hanya folder backend
       - /app/node_modules # anonymous volume untuk node_modules di container
+    command: npm run dev
 
   client:
     build: ./client

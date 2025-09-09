@@ -2,6 +2,8 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 
+import authRoutes from "./modules/auth/auth.routes.js";
+
 const app = express();
 
 // Middleware
@@ -13,6 +15,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send({ message: "Server is running!" });
 });
+
+app.use("/api/auth", authRoutes);
 
 // 404 handler
 app.use((req, res) => {
