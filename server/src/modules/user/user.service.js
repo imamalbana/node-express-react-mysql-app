@@ -1,6 +1,13 @@
+// src/modules/user/user.service.js
 import { prisma } from "../../config/db.js";
 
-// Ambil semua users + profile
+// Helper: filter hanya field profile yang valid
+function pickProfileFields(data) {
+  const { fullName, email, address, phone } = data;
+  return { fullName, email, address, phone };
+}
+
+// Ambil semua users + profile (admin only)
 export async function getAllUsersProfile() {
   return prisma.user.findMany({
     select: {
@@ -13,7 +20,7 @@ export async function getAllUsersProfile() {
   });
 }
 
-// Ambil 1 user + profile
+// Ambil user + profile
 export async function getUserProfile(userId) {
   return prisma.user.findUnique({
     where: { id: userId },
@@ -23,11 +30,18 @@ export async function getUserProfile(userId) {
 
 // Create / Update profile (pakai upsert)
 export async function upsertUserProfile(userId, data) {
-  return prisma.profile.upsert({
-    where: { userId },
-    update: data,
-    create: { ...data, userId },
-  });
+  try {
+    return await prisma.usersProfile.upsert({
+      where: { userId },
+      update: data,
+      create: { ...data, userId },
+    });
+  } catch (err) {
+    if (err.code === "P2002" && err.meta?.target?.includes("email")) {
+      throw new Error("EMAIL_ALREADY_EXISTS");
+    }
+    throw err;
+  }
 }
 
 // Delete user (cascade ke profile kalau di schema pakai onDelete: Cascade)

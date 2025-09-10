@@ -16,22 +16,24 @@ import { profileSchema } from "./user.validation.js";
 
 const router = Router();
 
-// Hanya admin bisa akses semua profiles
+// Admin: ambil semua profiles
 router.get("/", authMiddleware, roleMiddleware(["ADMIN"]), getAllProfiles);
 
-// Semua user yang login bisa akses profile mereka sendiri
+// User: ambil profile sendiri
 router.get("/me", authMiddleware, getProfile);
 
-// Update profile sendiri
-router.post(
+// User: update profile sendiri
+router.patch(
   "/me/profile",
   authMiddleware,
   validate(profileSchema),
   updateProfile
 );
 
-// Delete akun sendiri beserta profile
+// User: delete akun sendiri
 router.delete("/me", authMiddleware, deleteMyAccount);
+
+// Admin: delete user lain
 router.delete(
   "/:id",
   authMiddleware,

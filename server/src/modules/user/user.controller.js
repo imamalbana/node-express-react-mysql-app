@@ -56,6 +56,12 @@ export async function updateProfile(req, res, next) {
       data: profile,
     });
   } catch (err) {
+    if (err.message === "EMAIL_ALREADY_EXISTS") {
+      return res.status(400).json({
+        status: "error",
+        message: "Email already used by another user",
+      });
+    }
     next(err);
   }
 }
@@ -91,6 +97,14 @@ export async function deleteUserByAdmin(req, res, next) {
       return res.status(400).json({
         status: "error",
         message: "Invalid user ID",
+      });
+    }
+
+    // Admin tidak boleh hapus akun sendiri
+    if (req.user.userId === userId) {
+      return res.status(400).json({
+        status: "error",
+        message: "Admin cannot delete their own account",
       });
     }
 
