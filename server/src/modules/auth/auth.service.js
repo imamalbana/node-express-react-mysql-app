@@ -29,14 +29,8 @@ export async function loginUser({ username, password }) {
 
   const token = generateToken({
     userId: user.id,
-    username: user.username,
     role: user.role,
   });
 
-  return {
-    id: user.id,
-    username: user.username,
-    role: user.role,
-    token,
-  };
+  return { token };
 }
